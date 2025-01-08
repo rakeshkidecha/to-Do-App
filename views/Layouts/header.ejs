@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO</title>
+    <!-- remixicon css  -->
+     <link rel="stylesheet" href="/remix/remixicon.css" type="text/css" />
+    <!-- Fontawsome css  -->
+     <link rel="stylesheet" href="/css/all.min.css" type="text/css" />
+    <!-- main css  -->
+     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+    <!-- main css  -->
+     <link rel="stylesheet" href="/css/style.css" type="text/css" />
+</head>
+<body>
+    <header>
+        <div class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+              <a class="navbar-brand fw-bold" href="/">My-TO-DO</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse  align-items-center" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                  </li>
+                </ul>
+                <a class="d-flex align-items-center nav-link">
+                    <img src="<%= user.profile_image %>" alt="user" title="user" width="40px" class="img-fluid rounded-circle" />
+                    <p class="m-0 ms-2">myProfile</p>
+                </a>
+              </div>
+            </div>
+        </div>
+    </header>

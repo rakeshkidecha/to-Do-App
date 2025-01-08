@@ -1,0 +1,49 @@
+body{
+    background-color: #2B1887;
+}
+p{
+    margin: 0;
+}
+header,footer{
+    background-color: #F4F2FF;
+}
+header .navbar-brand{
+    color: #017BFF;
+}
+header .navbar-brand:hover{
+    color: #0669d3;
+}
+.to-do-form{
+    background-color: #D5CCFF;
+    color: #2B1887;
+}
+.to-do-form .btn{
+    background-color: #2B1887;
+    border: 2px solid #2B1887;
+    color: white;
+    transition: all .3s linear;
+}
+.to-do-form .btn:hover{
+    background-color: transparent;
+    color: #2B1887 !important;
+}
+.form-control:focus{
+    box-shadow: 0 0 0 .25rem #2a188752 !important;
+}
+.sub-to-do{ 
+    background-color: #5D5FEF;
+}
+.to-do-item{
+    background-color: white;
+}
+.to-do-item h4{
+    color: #2B1887 !important;
+}
+.to-do-item .btn{
+    font-size: 14px !important;
+}
+.to-do-item .procced{
+    background-color: #5D5FEF;
+    border: 2px solid #5D5FEF;
+    transition: all .3s linear;
+}

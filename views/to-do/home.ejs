@@ -1,0 +1,131 @@
+<%- include('../Layouts/header') %>
+
+    <main>
+        <section class="py-5 text-white">
+            <div class="conatiner">
+                <h4 class="text-center text-white">Add your To-Do Task</h4>
+                <div class="col-6 mx-auto to-do-form p-3 rounded-3 my-3">
+                    <form method="post" action="/home/insertToDo">
+                        <label class="mb-2">Title:-</label>
+                        <input type="text" name="title" placeholder="Enter title" class="form-control" />
+                        
+                        <label class="mb-2 mt-3">Tag:-</label>
+                        <input type="text" name="tag" placeholder="Enter Tag" class="form-control" />
+
+                        <label class="mb-2 mt-3">Description:-</label>
+                        <textarea name="description" placeholder="Enter Description" class="form-control"></textarea>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="py-5 ">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="sub-to-do text-white p-4">
+                            <h5 class="mb-3"><i class="ri-time-line me-2"></i>Panding</h5>
+                            <% allToDo.map((item)=>{ 
+                                if(item.toDoType === 'pending'){ %>
+                                <div class="to-do-item my-4 p-3 rounded-3">
+                                    <h4><%= item.title %></h4>
+                                    <p class="text-dark"><%= item.tag %></p>
+                                    <p class="text-dark"><%= item.description %></p>
+                                    <div class="d-flex align-items-center my-2">
+                                        <a href="/home/checkToProceed/<%= item.id %>" class="btn procced text-white my-2" ><i class="fa-solid fa-plus me-2"></i>Proceed</a>
+                                        <a href="/home/deleteToDo/<%= item.id %>" class="text-white btn  btn-danger mx-2"><i class="fa-solid fa-trash"></i></a>
+                                        <p class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateToDoModal" onclick='updateToDo(`<%= JSON.stringify(item) %>`)' ><i class="fa-solid fa-pen-to-square"></i></p>
+                                    </div>
+                                </div>
+                            <% }}) %>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="sub-to-do text-white p-4">
+                            <h5 class="mb-3"><i class="fa-solid fa-spinner me-2"></i> in Process</h5>
+                            <% allToDo.map((item)=>{ 
+                                if(item.toDoType === 'inProcess'){ %>
+                                <div class="to-do-item my-4 p-3 rounded-3">
+                                    <h4><%= item.title %></h4>
+                                    <p class="text-dark"><%= item.tag %></p>
+                                    <p class="text-dark"><%= item.description %></p>
+                                    <div class="d-flex align-items-center my-2">
+                                        <a href="/home/checkToCompleted/<%= item.id %>" class="btn btn-success my-2"><i class="fa-solid fa-check"></i></a>
+                                        <a href="/home/deleteToDo/<%= item.id %>" class="text-white btn  btn-danger mx-2"><i class="fa-solid fa-trash"></i></a>
+                                        <p class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateToDoModal" onclick='updateToDo(`<%= JSON.stringify(item) %>`)' ><i class="fa-solid fa-pen-to-square"></i></p>
+                                    </div>
+                                </div>
+                            <% }}) %>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="sub-to-do text-white p-4">
+                            <h5 class="mb-3"><i class="fa-solid fa-circle-check me-2"></i> Completed</h5>
+                            <% allToDo.map((item)=>{ 
+                                if(item.toDoType === 'completed'){ %>
+                                <div class="to-do-item my-4 p-3 rounded-3">
+                                    <h4><%= item.title %></h4>
+                                    <p class="text-dark"><%= item.tag %></p>
+                                    <p class="text-dark"><%= item.description %></p>
+                                    <div class="d-flex my-2">
+                                        <a href="/home/deleteToDo/<%= item.id %>" class="text-white btn  btn-danger me-2"><i class="fa-solid fa-trash"></i></a>
+                                        <p class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateToDoModal" onclick='updateToDo(`<%= JSON.stringify(item) %>`)' ><i class="fa-solid fa-pen-to-square"></i></p>
+                                    </div>
+                                </div>
+                            <% }}) %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- update to do modal -->
+        
+        <!-- Modal -->
+        <div class="modal fade" id="updateToDoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Update To Do</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" action="/home/updateToDo">
+                    <input type="hidden" id="todoId" name="id"/>
+                    <div class="modal-body">
+                        <label class="mb-2">Title:-</label>
+                        <input type="text" id="uTitle" name="title" placeholder="Enter title" class="form-control" />
+                        
+                        <label class="mb-2 mt-3">Tag:-</label>
+                        <input type="text" id="uTag" name="tag" placeholder="Enter Tag" class="form-control" />
+
+                        <label class="mb-2 mt-3">Description:-</label>
+                        <textarea name="description" id="uDescription" placeholder="Enter Description" class="form-control"></textarea>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function updateToDo(item){
+            const toDo = JSON.parse(item);
+            console.log(toDo)
+            document.querySelector('#todoId').value = toDo._id;
+            document.querySelector('#uTitle').value = toDo.title;
+            document.querySelector('#uTag').value = toDo.tag;
+            document.querySelector('#uDescription').value = toDo.description;
+        }
+    </script>
+
+<%- include('../Layouts/footer') %>
