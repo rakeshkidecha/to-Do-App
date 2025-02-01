@@ -21,8 +21,11 @@
 </head>
 <body class="w-100 d-flex align-items-center justify-content-center">
     
-    <section class="col-4">
-        <h3 class="text-white text-center mb-4">Login And Starting</h3>
+    <section class="col-3">
+        <div class="text-white text-center mb-4">
+            <h3>Welcome Back</h3>
+            <p>Enter your credential to Login</p>
+        </div>
         <div class="to-do-form p-3 rounded-3 my-3">
             <form method="post" action="/checkLogin">
                 <label class="mb-2">Email:-</label>
@@ -31,11 +34,13 @@
                 <label class="mb-2 mt-3">Password:-</label>
                 <input type="text" name="password" placeholder="Enter password" class="form-control" />
 
+                <a href="" class="nav-link text-primary my-3">Forget password</a>
+
                 <div class="text-center mt-4">
-                    <button type="submit" class="btn">Login</button>
-                    <a href="/signUp">Create account</a>
+                    <button type="submit" class="btn w-100">Login</button>
                 </div>
             </form>
+            <p class="text-dark mt-5 text-center mb-2">Don't Have a Account? <a href="/signUp" class="nav-link text-primary d-inline-block signup-link">Sign Up</a></p>
         </div>
     </section>
 

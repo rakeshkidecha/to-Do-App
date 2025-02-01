@@ -92,3 +92,13 @@ module.exports.insertUser = async(req,res)=>{
         return res.redirect('back')
     }
 }
+
+module.exports.logout = async(req,res)=>{
+    try {
+        res.clearCookie('user');
+        return res.redirect('/');
+    } catch (err) {
+        console.log("Something Wrong",err)
+        return res.redirect('back')
+    }
+}

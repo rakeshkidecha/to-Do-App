@@ -5,11 +5,12 @@ const cryptr = new Cryptr('SecretKeydfhkdi8df');
 module.exports.viewToDo = async(req,res)=>{
     try {
         const user = JSON.parse(cryptr.decrypt(req.cookies.user))
+        
         if(!user){
             return res.redirect('/');
         }
 
-        const allToDo = await ToDo.find();
+        const allToDo = await ToDo.find({userId:user._id});
         return res.render('to-do/home',{allToDo,user});
     } catch (err) {
         console.log("Something Wrong ",err);
@@ -19,6 +20,10 @@ module.exports.viewToDo = async(req,res)=>{
 
 module.exports.insertToDo = async (req,res)=>{
     try {
+
+        const user = JSON.parse(cryptr.decrypt(req.cookies.user));
+
+        req.body.userId = user._id;
 
         const addedToDo = await ToDo.create(req.body);
 

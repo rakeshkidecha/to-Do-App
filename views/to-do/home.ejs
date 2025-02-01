@@ -2,23 +2,29 @@
 
     <main>
         <section class="py-5 text-white">
-            <div class="conatiner">
-                <h4 class="text-center text-white">Add your To-Do Task</h4>
-                <div class="col-6 mx-auto to-do-form p-3 rounded-3 my-3">
-                    <form method="post" action="/home/insertToDo">
-                        <label class="mb-2">Title:-</label>
-                        <input type="text" name="title" placeholder="Enter title" class="form-control" />
-                        
-                        <label class="mb-2 mt-3">Tag:-</label>
-                        <input type="text" name="tag" placeholder="Enter Tag" class="form-control" />
-
-                        <label class="mb-2 mt-3">Description:-</label>
-                        <textarea name="description" placeholder="Enter Description" class="form-control"></textarea>
-
-                        <div class="text-center mt-4">
-                            <button type="submit" class="btn">Add</button>
-                        </div>
-                    </form>
+            <div class="container">
+                <div id="addTask" class="py-2 px-3 bg-white text-dark d-flex justify-content-between align-items-center">
+                    <h5>Add Task</h5>
+                    <i class="fa-solid fa-plus" id="plusIcon"></i>
+                    <i class="ri-arrow-up-s-line fs-4" style="display: none;" id="uparrowIcon"></i>
+                </div>
+                <div id="taskForm" class="taskForm ">
+                    <div class="col-6 mx-auto to-do-form p-3 rounded-3 my-3">
+                        <form method="post" action="/home/insertToDo">
+                            <label class="mb-2">Title:-</label>
+                            <input type="text" name="title" placeholder="Enter title" class="form-control" />
+                            
+                            <label class="mb-2 mt-3">Tag:-</label>
+                            <input type="text" name="tag" placeholder="Enter Tag" class="form-control" />
+    
+                            <label class="mb-2 mt-3">Description:-</label>
+                            <textarea name="description" placeholder="Enter Description" class="form-control"></textarea>
+    
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn">Add</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
@@ -27,55 +33,76 @@
                 <div class="row g-4">
                     <div class="col-lg-4">
                         <div class="sub-to-do text-white p-4">
-                            <h5 class="mb-3"><i class="ri-time-line me-2"></i>Panding</h5>
-                            <% allToDo.map((item)=>{ 
-                                if(item.toDoType === 'pending'){ %>
+                            <h5 class="mb-3"><i class="ri-time-line me-2"></i>Pending</h5>
+                            <%  let count = 0;
+                             allToDo.map((item)=>{ 
+                                if(item.toDoType === 'pending'){ 
+                                count++ %>
                                 <div class="to-do-item my-4 p-3 rounded-3">
                                     <h4><%= item.title %></h4>
-                                    <p class="text-dark"><%= item.tag %></p>
+                                    <div class="tag my-2 px-2 d-inline-block">
+                                        <p class="text-dark"><%= item.tag %></p>
+                                    </div>
                                     <p class="text-dark"><%= item.description %></p>
-                                    <div class="d-flex align-items-center my-2">
+                                    <div class="d-flex align-items-center mt-2">
                                         <a href="/home/checkToProceed/<%= item.id %>" class="btn procced text-white my-2" ><i class="fa-solid fa-plus me-2"></i>Proceed</a>
                                         <a href="/home/deleteToDo/<%= item.id %>" class="text-white btn  btn-danger mx-2"><i class="fa-solid fa-trash"></i></a>
                                         <p class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateToDoModal" onclick='updateToDo(`<%= JSON.stringify(item) %>`)' ><i class="fa-solid fa-pen-to-square"></i></p>
                                     </div>
                                 </div>
-                            <% }}) %>
+                            <% }});
+                            if(count == 0) { %>
+                                <p>no task </p>
+                            <% }%>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="sub-to-do text-white p-4">
                             <h5 class="mb-3"><i class="fa-solid fa-spinner me-2"></i> in Process</h5>
-                            <% allToDo.map((item)=>{ 
-                                if(item.toDoType === 'inProcess'){ %>
+                            <%   count = 0;
+                             allToDo.map((item)=>{ 
+                                if(item.toDoType === 'inProcess'){
+                                count++     %>
                                 <div class="to-do-item my-4 p-3 rounded-3">
                                     <h4><%= item.title %></h4>
-                                    <p class="text-dark"><%= item.tag %></p>
+                                    <div class="tag my-2 px-2 d-inline-block">
+                                        <p class="text-dark"><%= item.tag %></p>
+                                    </div>
                                     <p class="text-dark"><%= item.description %></p>
-                                    <div class="d-flex align-items-center my-2">
+                                    <div class="d-flex align-items-center mt-2">
                                         <a href="/home/checkToCompleted/<%= item.id %>" class="btn btn-success my-2"><i class="fa-solid fa-check"></i></a>
                                         <a href="/home/deleteToDo/<%= item.id %>" class="text-white btn  btn-danger mx-2"><i class="fa-solid fa-trash"></i></a>
                                         <p class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateToDoModal" onclick='updateToDo(`<%= JSON.stringify(item) %>`)' ><i class="fa-solid fa-pen-to-square"></i></p>
                                     </div>
                                 </div>
-                            <% }}) %>
+                            <% }});
+                            if(count == 0) { %>
+                                <p>no task </p>
+                            <% }%>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="sub-to-do text-white p-4">
                             <h5 class="mb-3"><i class="fa-solid fa-circle-check me-2"></i> Completed</h5>
-                            <% allToDo.map((item)=>{ 
-                                if(item.toDoType === 'completed'){ %>
+                            <%   count = 0;
+                             allToDo.map((item)=>{ 
+                                if(item.toDoType === 'completed'){
+                                 count++    %>
                                 <div class="to-do-item my-4 p-3 rounded-3">
                                     <h4><%= item.title %></h4>
-                                    <p class="text-dark"><%= item.tag %></p>
+                                    <div class="tag my-2 px-2 d-inline-block">
+                                        <p class="text-dark"><%= item.tag %></p>
+                                    </div>>
                                     <p class="text-dark"><%= item.description %></p>
-                                    <div class="d-flex my-2">
+                                    <div class="d-flex mt-2">
                                         <a href="/home/deleteToDo/<%= item.id %>" class="text-white btn  btn-danger me-2"><i class="fa-solid fa-trash"></i></a>
                                         <p class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateToDoModal" onclick='updateToDo(`<%= JSON.stringify(item) %>`)' ><i class="fa-solid fa-pen-to-square"></i></p>
                                     </div>
                                 </div>
-                            <% }}) %>
+                            <% }}); 
+                            if(count == 0) { %>
+                                <p>no task </p>
+                            <% }%>
                         </div>
                     </div>
                 </div>
@@ -117,6 +144,7 @@
 
     </main>
 
+
     <script>
         function updateToDo(item){
             const toDo = JSON.parse(item);
@@ -126,6 +154,27 @@
             document.querySelector('#uTag').value = toDo.tag;
             document.querySelector('#uDescription').value = toDo.description;
         }
+
+        // document.querySelector('#addTask').addEventListener('click',()=>{
+        //     document.querySelector('#taskForm').classList.toggle('showTaskForm');
+        // })
+
+        document.querySelector('#addTask').addEventListener('click', () => {
+            const taskForm = document.querySelector('#taskForm');
+            if (taskForm.style.maxHeight) {
+                // If the form is open, slide it up (hide it)
+                document.getElementById('plusIcon').style.display = 'block';
+                document.getElementById('uparrowIcon').style.display = 'none';
+                taskForm.style.maxHeight = null;
+            } else {
+                // If the form is hidden, slide it down (show it)
+                document.getElementById('plusIcon').style.display = 'none';
+                document.getElementById('uparrowIcon').style.display = 'block';
+                taskForm.style.maxHeight = taskForm.scrollHeight + "px";
+            }
+        });
+
+
     </script>
 
 <%- include('../Layouts/footer') %>

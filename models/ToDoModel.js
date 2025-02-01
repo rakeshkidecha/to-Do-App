@@ -21,6 +21,10 @@ const ToDoSchema = mongoose.Schema({
     toDoType:{
         type : String,
         default : "pending"
+    },
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref : 'User',
     }
 })
 

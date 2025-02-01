@@ -13,6 +13,8 @@ router.get('/signUp',UserCtl.signUp);
 
 router.post('/insertUser',User.uploadProfileImage,UserCtl.insertUser);
 
+// logout 
+router.get('/logout',UserCtl.logout);
 
 
 module.exports = router;
