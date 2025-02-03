@@ -7,7 +7,7 @@ module.exports.login = async(req,res)=>{
         if(req.cookies.user){
             return res.redirect('/home');
         }else{
-            return res.render('users/login');
+            return res.render('users/logIn');
         }
     } catch (err) {
         console.log("SOmething Wrong",err)
