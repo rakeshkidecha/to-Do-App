@@ -1,5 +1,4 @@
 const express = require('express');
-const port = 8001;
 const path = require('path');
 const db = require('./config/db');
 const cookieParser = require('cookie-parser');
@@ -18,4 +17,4 @@ app.use('/',require('./routes/userRoutes'));
 app.use('/home',require('./routes/toDoRoutes'));
 
 
-app.listen(port,err=>console.log(err?err:"Server Runing in http://localhost:"+port));
+app.listen(process.env.PORT,err=>console.log(err?err:"Server Runing in http://localhost:"+process.env.PORT));
