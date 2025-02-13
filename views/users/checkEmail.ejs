@@ -23,24 +23,18 @@
     
     <section class="col-3">
         <div class="text-white text-center mb-4">
-            <h3>Welcome Back</h3>
-            <p>Enter your credential to Login</p>
+            <h3>Forget Password</h3>
+            <p>Enter your Email For Otp</p>
         </div>
         <div class="to-do-form p-3 rounded-3 my-3">
-            <form method="post" action="/checkLogin">
+            <form method="post" action="/verifyEmail">
                 <label class="mb-2">Email:-</label>
                 <input type="text" name="email" placeholder="Enter email" class="form-control" />
-                
-                <label class="mb-2 mt-3">Password:-</label>
-                <input type="password" name="password" placeholder="Enter password" class="form-control" />
-
-                <a href="/checkEmail" class="nav-link text-primary my-3">Forget password</a>
 
                 <div class="text-center mt-4">
-                    <button type="submit" class="btn w-100">Login</button>
+                    <button type="submit" class="btn w-100">Send Otp</button>
                 </div>
             </form>
-            <p class="text-dark mt-5 text-center mb-2">Don't Have a Account? <a href="/signUp" class="nav-link text-primary d-inline-block signup-link">Sign Up</a></p>
         </div>
     </section>
 

@@ -23,22 +23,40 @@
         <div class="to-do-form p-3 rounded-3 my-3">
             <form method="post" action="/insertUser" enctype="multipart/form-data">
                 <label class="mb-2">First Name:-</label>
-                <input type="text" name="fName" placeholder="Enter First Name" class="form-control" />
+                <input type="text" name="fName" value="<%= oldValue?oldValue.fName:'' %>" placeholder="Enter First Name" class="form-control" />
+                <% if(errors&&errors.fName){ %>
+                    <p class="text-danger"><%= errors.fName.msg %></p>
+                <% } %>
                 
                 <label class="mb-2 mt-3">Last Name:-</label>
-                <input type="text" name="lName" placeholder="Enter Last Name" class="form-control" />
+                <input type="text" name="lName" value="<%= oldValue?oldValue.lName:'' %>" placeholder="Enter Last Name" class="form-control" />
+                <% if(errors&&errors.lName){ %>
+                    <p class="text-danger"><%= errors.lName.msg %></p>
+                <% } %>
                 
                 <label class="mb-2 mt-3">Email:-</label>
-                <input type="text" name="email" placeholder="Enter email" class="form-control" />
+                <input type="text" name="email" value="<%= oldValue?oldValue.email:'' %>" placeholder="Enter email" class="form-control" />
+                <% if(errors&&errors.email){ %>
+                    <p class="text-danger"><%= errors.email.msg %></p>
+                <% } %>
                 
                 <label class="mb-2 mt-3">Password:-</label>
-                <input type="text" name="password" placeholder="Enter password" class="form-control" />
+                <input type="password" name="password" value="<%= oldValue?oldValue.password:'' %>" placeholder="Enter password" class="form-control" />
+                <% if(errors&&errors.password){ %>
+                    <p class="text-danger"><%= errors.password.msg %></p>
+                <% } %>
 
                 <label class="mb-2 mt-3">Confirm Password:-</label>
-                <input type="text" name="confirmPassword" placeholder="Re Enter password" class="form-control" />
+                <input type="password" value="<%= oldValue?oldValue.confirmPassword:'' %>" name="confirmPassword" placeholder="Re Enter password" class="form-control" />
+                <% if(errors && errors.confirmPassword){ %>
+                    <p class="text-danger"><%= errors.confirmPassword.msg %></p>
+                <% } %>
 
                 <label class="mb-2 mt-3">Profile Image:-</label>
                 <input type="file" name="profile_image" class="form-control" />
+                <% if(errors&&errors.profile_image){ %>
+                    <p class="text-danger"><%= errors.profile_image.msg %></p>
+                <% } %>
 
                 <div class="text-center mt-4">
                     <button type="submit" class="btn w-100">Sign Up</button>
