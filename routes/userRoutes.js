@@ -42,7 +42,7 @@ router.post('/checkChangePassword',[
             throw new Error('Old Password is not match');
         }
     }),
-    check('newPassword').notEmpty().withMessage("New Password is required").custom(async (value,{req})=>{
+    check('newPassword').notEmpty().withMessage("New Password is required").matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i").withMessage('Password should be combination of one uppercase , one lower case, one special char, one digit and min 8 , max 20 char long').custom(async (value,{req})=>{
         if(value == req.body.oldPassword){
             throw new Error('Old and New Password are same');
         }
@@ -73,7 +73,7 @@ router.post('/verifyOtp',UserCtl.verifyOtp);
 router.get('/forgetPassword',UserCtl.forgetPassword);
 
 router.post('/checkPassword',[
-    check('newPassword').notEmpty().withMessage("New Password is Required"),
+    check('newPassword').notEmpty().withMessage("New Password is Required").matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i").withMessage('Password should be combination of one uppercase , one lower case, one special char, one digit and min 8 , max 20 char long'),
     check('confirmPassword').notEmpty().withMessage("Confirm Password is Required").custom(async (value,{req})=>{
         if(value != req.body.newPassword){
             throw new Error('New and Confirm Password are not Match');
