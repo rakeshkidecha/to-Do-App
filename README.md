@@ -10,6 +10,9 @@ A secure and user-friendly To-Do List application with authentication, built usi
 ✅ Personalized To-Do List – Users can Add, Edit, Remove, and View their own tasks
 
 🛠 Tech Stack
+
 Backend: Node.js, Express.js
+
 Database: MongoDB with Mongoose
+
 Authentication: Cookie-parser, Bcrypt
